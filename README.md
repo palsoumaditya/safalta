@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# **Safalta - AI-Powered Career Development Platform**
 
-## Getting Started
+**Safalta** is an advanced AI-driven platform designed to empower individuals in their career journey. The platform offers personalized resume building, AI-generated cover letters, mock interview sessions, and insightful market analytics to assist users in making informed career decisions.
 
-First, run the development server:
+---
+
+## **Table of Contents**
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Architecture](#architecture)
+- [Key Features](#key-features)
+- [Contributing](#contributing)
+- [License](#license)
+
+---
+
+## **Introduction**
+
+Safalta leverages the power of AI to guide users through critical stages of their career development. With industry insights, customized resume-building tools, AI-powered cover letter generation, and mock interviews, the platform is designed to support job seekers and professionals in achieving career success.
+
+---
+
+## **Installation**
+
+To get started with Safalta, clone the repository and install the required dependencies. Ensure you have **Node.js** and **npm** installed on your machine.
+
+1. **Clone the repository:**
+
+```bash
+git clone https://github.com/palsoumaditya/safalta.git
+cd safalta
+```
+
+2. **Install dependencies:**
+
+```bash
+npm install
+```
+
+---
+
+## **Usage**
+
+To run the application locally in a development environment, use the following command:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Once the development server is up and running, open your browser and navigate to `http://localhost:3000` to access the application.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## **Architecture**
 
-## Learn More
+### **RootLayout**
 
-To learn more about Next.js, take a look at the following resources:
+The `RootLayout` component serves as the foundation of the application’s structure, managing the layout including global components like the header, footer, and theme provider.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### **Header**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The `Header` component houses the main navigation, user authentication controls, and dropdown menus to access different career development tools.
 
-## Deploy on Vercel
+### **ThemeProvider**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Utilizing the `next-themes` package, the `ThemeProvider` component manages dark and light theme preferences for a personalized user experience.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### **ClerkProvider**
+
+The `ClerkProvider` component handles user authentication, session management, and secure login functionalities.
+
+---
+
+## **Key Features**
+
+### **Industry Insights**
+- Provides real-time insights and trends across various industries, helping users stay updated on market changes.
+
+### **Resume Builder**
+- Customizable templates and AI-powered suggestions to assist users in creating professional resumes tailored to their career goals.
+
+### **AI Cover Letter Generator**
+- AI-powered tool that helps generate personalized and impactful cover letters that align with job descriptions and personal achievements.
+
+### **Mock Interviews**
+- A feature designed to simulate real-world interview environments, providing users with critical practice sessions and feedback to enhance interview performance.
+
+---
+
+## **Contributing**
+
+We welcome contributions from the open-source community. If you would like to contribute to Safalta, please follow these steps:
+
+1. **Fork the repository** to your GitHub account.
+2. **Clone your fork** to your local machine.
+3. **Create a new branch** for your feature or bugfix:
+   ```bash
+   git checkout -b my-feature-branch
+   ```
+4. **Make changes** and commit them with a detailed message:
+   ```bash
+   git commit -m 'Description of your changes'
+   ```
+5. **Push your changes** to your fork:
+   ```bash
+   git push origin my-feature-branch
+   ```
+6. **Open a pull request** to the main repository for review.
+
+---
+
+

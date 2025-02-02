@@ -3,7 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import Header from "../components/Header";
 import { ClerkProvider } from "@clerk/nextjs";
-
+import { dark, neobrutalism } from '@clerk/themes'
 export const metadata = {
   title: "Safalta",
   description: "Guide you to your carrier through ai",
@@ -11,7 +11,9 @@ export const metadata = {
 const inter = Inter({subsets: ['latin']});
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider appearance={{
+      baseTheme: [dark, neobrutalism],
+    }}>
     <html lang="en" suppressHydrationWarning >
       <body
         className={`${inter.className}`}
