@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-const Authlayout = ({children}) => {
+const Authlayout = ({ children }) => {
   return (
-    <div className='flex justify-center pt-40'>{children}</div>
-  )
-}
+    <div className="flex flex-col justify-center items-center min-h-screen mt-20">
+      {children}
+    </div>
+  );
+};
 
-export default Authlayout
+export default Authlayout;
