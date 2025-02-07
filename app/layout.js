@@ -29,9 +29,21 @@ export default function RootLayout({ children }) {
           >
             <Header />
             <main className="min-h-screen mt-16">{children}</main> {/* Adjusted margin-top for navbar */}
-            <footer className="bg-muted/50 py-12">
+            
+            {/* Footer Section */}
+            <footer className="bg-background py-12">
               <div className="container mx-auto text-center px-4 text-gray-200">
-                <p>Made with Love by Soumaditya</p>
+                <p>
+                  Made with ❤️ by{" "}
+                  <a
+                    href="https://soumadityapal.netlify.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline"
+                  >
+                    Soumaditya
+                  </a>
+                </p>
               </div>
             </footer>
           </ThemeProvider>
