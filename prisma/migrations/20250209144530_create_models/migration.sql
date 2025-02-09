@@ -1,13 +1,13 @@
 -- CreateEnum
-CREATE TYPE "DemandLevel" AS ENUM ('HIGH', 'MEDIUM', 'LOW');
+CREATE TYPE "DemandLevel" AS ENUM ('LOW', 'MEDIUM', 'HIGH');
 
 -- CreateEnum
-CREATE TYPE "MarketTrend" AS ENUM ('POSITIVE', 'NEGATIVE', 'NEUTRAL');
+CREATE TYPE "MarketOutlook" AS ENUM ('POSITIVE', 'NEUTRAL', 'NEGATIVE');
 
 -- CreateTable
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
-    "clearkUserId" TEXT NOT NULL,
+    "clerkUserId" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "name" TEXT,
     "imageUrl" TEXT,
@@ -15,7 +15,7 @@ CREATE TABLE "User" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "bio" TEXT,
-    "experience" TEXT,
+    "experience" INTEGER,
     "skills" TEXT[],
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
@@ -26,9 +26,9 @@ CREATE TABLE "Assessment" (
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "quizScore" DOUBLE PRECISION NOT NULL,
-    "questions" JSONB NOT NULL,
+    "questions" JSONB[],
     "category" TEXT NOT NULL,
-    "improvementTips" TEXT,
+    "improvementTip" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -40,6 +40,8 @@ CREATE TABLE "Resume" (
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "content" TEXT NOT NULL,
+    "atsScore" DOUBLE PRECISION,
+    "feedback" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -54,6 +56,7 @@ CREATE TABLE "CoverLetter" (
     "jobDescription" TEXT,
     "companyName" TEXT NOT NULL,
     "jobTitle" TEXT NOT NULL,
+    "status" TEXT NOT NULL DEFAULT 'draft',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -68,7 +71,7 @@ CREATE TABLE "IndustryInsight" (
     "growthRate" DOUBLE PRECISION NOT NULL,
     "demandLevel" "DemandLevel" NOT NULL,
     "topSkills" TEXT[],
-    "marketTrend" "MarketTrend" NOT NULL,
+    "marketOutlook" "MarketOutlook" NOT NULL,
     "keyTrends" TEXT[],
     "recommendedSkills" TEXT[],
     "lastUpdated" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -78,7 +81,7 @@ CREATE TABLE "IndustryInsight" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User_clearkUserId_key" ON "User"("clearkUserId");
+CREATE UNIQUE INDEX "User_clerkUserId_key" ON "User"("clerkUserId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
@@ -88,9 +91,6 @@ CREATE INDEX "Assessment_userId_idx" ON "Assessment"("userId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Resume_userId_key" ON "Resume"("userId");
-
--- CreateIndex
-CREATE UNIQUE INDEX "CoverLetter_userId_key" ON "CoverLetter"("userId");
 
 -- CreateIndex
 CREATE INDEX "CoverLetter_userId_idx" ON "CoverLetter"("userId");
