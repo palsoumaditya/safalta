@@ -19,8 +19,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { onboardingSchema } from "../../../lib/schema";
 import { industries } from "@/data/industries"; 
+import { Textarea } from "@/components/ui/textarea";
 
 const OnboardingForm = () => {
   const router = useRouter();
@@ -42,11 +44,9 @@ const OnboardingForm = () => {
   // Find selected industry details
   const selectedIndustryData = industries.find((ind) => ind.id === industryValue);
 
-  const onSubmit = (data) => {
-    console.log("Form Data:", data);
-    // Example: Send data to API or navigate
-    // router.push('/dashboard');
-  };
+  const onSubmit = async (values) =>{
+    console.log(values);
+  }
 
   return (
     <div className="flex items-center justify-center bg-background">
@@ -60,7 +60,7 @@ const OnboardingForm = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
             {/* Industry Select */}
             <div className="space-y-2">
               <label htmlFor="industry">Industry</label>
@@ -88,34 +88,75 @@ const OnboardingForm = () => {
               )}
             </div>
 
-            {/* SubIndustry Select */}
+            {/* SubIndustry Select (conditionally rendered) */}
+            {industryValue && (
+              <div className="space-y-2 mt-4">
+                <label htmlFor="subIndustry">Subindustry</label>
+                <Select
+                  disabled={!selectedIndustryData} // Disable if no industry is selected
+                  onValueChange={(value) => setValue("subIndustry", value)}
+                >
+                  <SelectTrigger id="subIndustry">
+                    <SelectValue placeholder="Select a Subindustry" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {selectedIndustryData?.subIndustries.map((sub, index) => (
+                      <SelectItem value={sub} key={index}>
+                        {sub}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <input type="hidden" {...register("subIndustry")} />
+                {errors.subIndustry && (
+                  <p className="text-sm text-red-500">{errors.subIndustry.message}</p>
+                )}
+              </div>
+            )}
+
+            {/* Years of Experience Input */}
             <div className="space-y-2 mt-4">
-              <label htmlFor="subIndustry">Subindustry</label>
-              <Select
-                disabled={!selectedIndustryData} // Disable if no industry is selected
-                onValueChange={(value) => setValue("subIndustry", value)}
-              >
-                <SelectTrigger id="subIndustry">
-                  <SelectValue placeholder="Select a Subindustry" />
-                </SelectTrigger>
-                <SelectContent>
-                  {selectedIndustryData?.subIndustries.map((sub, index) => (
-                    <SelectItem value={sub} key={index}>
-                      {sub}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <input type="hidden" {...register("subIndustry")} />
-              {errors.subIndustry && (
-                <p className="text-sm text-red-500">{errors.subIndustry.message}</p>
+              <label htmlFor="experience">Years of Experience</label>
+              <Input
+                id="experience"
+                type="number"
+                min="0"
+                max="50"
+                placeholder="Enter your years of experience"
+                {...register("experience", { valueAsNumber: true })}
+              />
+              {errors.experience && (
+                <p className="text-sm text-red-500">{errors.experience.message}</p>
               )}
             </div>
-
+            <div className="space-y-2 mt-4">
+              <label htmlFor="skills">Skills</label>
+              <Input
+                id="skills"
+                placeholder="e.g Python, Project Management, etc."
+                {...register("skills", { valueAsNumber: true })}
+              />
+              <p className="text-sm text-muted-foreground">Separate skills with commas</p>
+              {errors.skills && (
+                <p className="text-sm text-red-500">{errors.experience.message}</p>
+              )}
+            </div>
+            <div className="space-y-2 mt-4">
+              <label htmlFor="bio">Professional Bio</label>
+              <Textarea
+                id="bio"
+                placeholder="Tell us about your professional journey and achievements"
+                className="h-32"
+                {...register("bio", { valueAsNumber: true })}
+                />
+              {errors.bio && (
+                <p className="text-sm text-red-500">{errors.experience.message}</p>
+              )}
+            </div>
             {/* Submit Button */}
             <div className="mt-6">
               <Button type="submit" className="w-full">
-                Submit
+                Complete Profile
               </Button>
             </div>
           </form>
